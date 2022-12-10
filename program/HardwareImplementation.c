@@ -1,10 +1,10 @@
-/* hardwareImplementation.c
+/* HardwareImplementation.c
  * Author: Lucas Merritt/dynamic.void
  * Date: 12/9/22
  * Hardware init and useful functions
  */
 
-#include "hardwareImplementation.h"
+#include "HardwareImplementation.h"
 
 void HardwareModifyPin(volatile unsigned char portPinMode, int applyMode, int hardwarePin) {
     if(applyMode == APPLY_MODE_CLEAR)

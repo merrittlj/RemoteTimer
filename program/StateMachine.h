@@ -1,4 +1,4 @@
-/*  stateMachine.h
+/*  StateMachine.h
  *  Author: Lucas Merritt/dynamic.void
  *  Date: 12/8/22
  *  Header file for finite state machine functions and variables  */
@@ -43,4 +43,4 @@ sType FSM[6] = {
  * currentState: the current state of the display
  * timerRunning: if the timer is currently running or not
  */
-void displayStateUpdate(int *currentState, int timerRunning);
+void DisplayStateUpdate(int *currentState, int timerRunning);

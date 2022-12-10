@@ -1,4 +1,4 @@
-/*  displayNums.h
+/*  DisplayNums.h
  *  Author: Lucas Merritt/dynamic.void
  *  Date: 12/8/22
  *  Header file for display functions  */
@@ -38,11 +38,11 @@ unsigned char numbersToDisplay[4][2] = {
 /*
  * Initializes the display for the numbers, clearing past numbers and anything else required
  */
-void displayInit();
+void DisplayInit();
 
 /*
  * Sets the current display, used for multiplexing
  *
  * displayNum: The index of the display to set to(0-3)
  */
-void setCurrentDisplay(int displayNum);
+void SetCurrentDisplay(int displayNum);

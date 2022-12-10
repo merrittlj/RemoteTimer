@@ -3,6 +3,23 @@
  *  Date: 12/8/22
  *  The hardware implementation of the timer, configurable  */
 
+
+/*
+ * Memory addresses
+ *
+ * PORTx_DATA: Set this to control output, reading will only give what you have output before
+ * PORTx_DDR: Set this to control data direction, 1 = output 0 = input
+ * PORTx_PINS: Read from this to get input from peripherals
+ */
+#define PORTB_DATA (*((volatile unsigned char *)0x25))
+#define PORTC_DATA (*((volatile unsigned char *)0x28))
+#define PORTD_DATA (*((volatile unsigned char *)0x2B))
+#define PORTB_DDR (*((volatile unsigned char *)0x24))
+#define PORTC_DDR (*((volatile unsigned char *)0x27))
+#define PORTD_DDR (*((volatile unsigned char *)0x2A))
+#define PORTB_PINS (*((volatile unsigned char *)0x23))
+#define PORTC_PINS (*((volatile unsigned char *)0x26))
+
 /*
  * Hardware Pins
  * Used to set output and read input
@@ -39,52 +56,38 @@
  * 0 = Same port as the rest/Not seperate 1 = Different port/Seperate(port/pin specified later)
  */
 #define SEGMENT_G_SEPERATE 1
+#define SEPERATE_DATA PORTC_DATA
+#define SEPERATE_DDR PORTC_DDR
+#define SEPERATE_PINS PORTC_PINS
+#define SEPERATE_G_PIN 1
 
-#define MISC_PORT C
+#define MISC_DATA PORTC_DATA
+#define MISC_DDR PORTC_DDR
+#define MISC_PINS PORTC_PINS
 #define MISC_DECIMAL_PIN 0
-#define MISC_SEPERATE_G_PIN 1
 
 /*
- * Memory addresses
+ * Apply modes(for below function)
  *
- * PORTx_DATA: Set this to control output, reading will only give what you have output before
- * PORTx_DDR: Set this to control data direction, 1 = output 0 = input
- * PORTx_PINS: Read from this to get input from peripherals
+ * applyModeClear - Clear the pin
+ * applyModeSet - Set the pin to a specified value
  */
-#define PORTB_DATA (*((volatile unsigned char *)0x25))
-#define PORTC_DATA (*((volatile unsigned char *)0x28))
-#define PORTD_DATA (*((volatile unsigned char *)0x2B))
-#define PORTB_DDR (*((volatile unsigned char *)0x24))
-#define PORTC_DDR (*((volatile unsigned char *)0x27))
-#define PORTD_DDR (*((volatile unsigned char *)0x2A))
-#define PORTB_PINS (*((volatile unsigned char *)0x23))
-#define PORTC_PINS (*((volatile unsigned char *)0x26))
-
-/*
- * Pin Modes
- *
- * MODE_DATA - Set a bit for output, ex: enabled LED
- * MODE_DDR - Set a bit for the data direction, 0 = input 1 = output
- * MODE_PINS - Read a bit for input, ex: read button press
- */
-#define MODE_DATA 0
-#define MODE_DDR 1
-#define MODE_PINS 2
+#define APPLY_MODE_CLEAR 0
+#define APPLY_MODE_SET 1
 
 /*
  * Sets/clears a pin on the specified port in the specified way
  *
- * pinMode: Uses above definitions to specify which way to modify the pin
- * applyMode: 1 = clear the pin instead of setting it 0 = set the pin
- * hardwarePort: the port of the pin to clear/set
+ * pinMode: Uses definitions to specify which way to modify the pin on which port
+ * ex: SEGMENTDATA
+ * applyMode: See above definitions
  * hardwarePin: the pin to clear/set
- * [...]: the (optional) value to set the pin to
  */
-void hardwareModifyPin(int pinMode, int applyMode, int hardwarePort, int hardwarePin, ...);
+void HardwareModifyPin(volatile unsigned char portPinMode, int applyMode, int hardwarePin);
 
 /*
  * Initializes the hardware, data directions and such
  *
  * Uses previously defined hardware pins
  */
-void hardwareInit();
+void HardwareInit();

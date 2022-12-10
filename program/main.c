@@ -4,9 +4,9 @@
  *  Main file for initializing countdown, etc  */
 
 
-#include "hardwareImplementation.h"
-#include "displayNums.h"
-#include "stateMachine.h"
+#include "HardwareImplementation.h"
+#include "DisplayNums.h"
+#include "StateMachine.h"
 
 int main() {
     //TODO

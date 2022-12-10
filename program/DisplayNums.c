@@ -1,15 +1,16 @@
-/*  displayNums.c
+/*  DisplayNums.c
  *  Author: Lucas Merritt/dynamic.void
  *  Date: 12/8/22
  *  Functions to help display numbers and multiplex  */
 
 
-#include "hardwareImplementation.h"
+#include "HardwareImplementation.h"
+#include "DisplayNums.h"
 
-void displayInit() {
+void DisplayInit() {
     //TODO
 }
 
-void setCurrentDisplay(int displayNum) {
+void SetCurrentDisplay(int displayNum) {
     //TODO
 }
