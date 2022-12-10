@@ -36,13 +36,33 @@ unsigned char numbersToDisplay[4][2] = {
 };
 
 /*
- * Initializes the display for the numbers, clearing past numbers and anything else required
+ * Clears the current segments and whatever else is needed
  */
-void DisplayInit();
+void DisplayClear();
 
 /*
  * Sets the current display, used for multiplexing
  *
- * displayNum: The index of the display to set to(0-3)
+ * displayNum: The index of the display to set to(0-3), use hardware definitions to call
  */
-void SetCurrentDisplay(int displayNum);
+void DisplaySet(int displayNum);
+
+/*
+ * Shows the specified numbers on the display
+ *
+ * numbersToDisplay: The numbers to display, int form
+ * ex: to display "1234" you would call DisplayNumbers(1234)
+ * selectedDisplay: The current display
+ * decimalLocation: What display the decimal should be shown on
+ * Input a number > 3 if no decimal point(purposeful)
+ */
+void DisplayNumbers(int numbersToDisplay, int selectedDisplay, int decimalLocation);
+
+/*
+ * Update the time counter after a delay, based on time passed
+ *
+ * currentTime: The current time counter that is being actively displayed
+ * decimalLocation: Where the decimal is/time precision
+ * delayPeriod: How often the displays are switched between/multiplexed
+ */
+void UpdateDisplayTime(int currentTime, int decimalLocation, int delayPeriod);
