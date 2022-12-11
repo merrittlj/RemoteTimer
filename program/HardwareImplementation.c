@@ -13,18 +13,19 @@ void HardwareModifyPin(volatile unsigned char portPinMode, int applyMode, int ha
         portPinMode |= (1<<hardwarePin);
 }
 
-void HardwareInit() {
-    HardwareModifyPin(DISPLAY_DDR, APPLY_MODE_SET, DISPLAY_0_PIN);
-    HardwareModifyPin(DISPLAY_DDR, APPLY_MODE_SET, DISPLAY_1_PIN);
-    HardwareModifyPin(DISPLAY_DDR, APPLY_MODE_SET, DISPLAY_2_PIN);
-    HardwareModifyPin(DISPLAY_DDR, APPLY_MODE_SET, DISPLAY_3_PIN);
+void HardwareModifyRegister(volatile unsigned char modifyPortMode, int applyMode unsigned char applyPins) {
+    if(applyMode == APPLY_MODE_CLEAR)
+        modifyPortMode &= ~(applyPins);
+    if(applyMode == APPLY_MODE_CLEAR)
+        modifyPortMode |= applyPins;
+}
 
-    HardwareModifyPin(SEGMENT_DDR, APPLY_MODE_SET, SEGMENT_A_PIN);
-    HardwareModifyPin(SEGMENT_DDR, APPLY_MODE_SET, SEGMENT_B_PIN);
-    HardwareModifyPin(SEGMENT_DDR, APPLY_MODE_SET, SEGMENT_C_PIN);
-    HardwareModifyPin(SEGMENT_DDR, APPLY_MODE_SET, SEGMENT_D_PIN);
-    HardwareModifyPin(SEGMENT_DDR, APPLY_MODE_SET, SEGMENT_E_PIN);
-    HardwareModifyPin(SEGMENT_DDR, APPLY_MODE_SET, SEGMENT_F_PIN);
+void HardwareInit() {
+    unsigned char pinsValue = (1<<DISPLAY_0_PIN)+(1<<DISPLAY_1_PIN)+(1<<DISPLAY_2_PIN)+(1<<DISPLAY_3_PIN);
+    HardwareModifyRegister(DISPLAY_DDR, APPLY_MODE_SET, pinsValue);
+
+    pinsValue = (1<<SEGMENT_A_PIN)+(1<<SEGMENT_B_PIN)+(1<<SEGMENT_C_PIN)+(1<<SEGMENT_D_PIN)+(1<<SEGMENT_E_PIN)+(1<<SEGMENT_F_PIN);
+    HardwareModifyRegister(SEGMENT_DDR, APPLY_MODE_SET, pinsValue);
     if(SEGMENT_G_SEPERATE)
         HardwareModifyPin(SEPERATE_DDR, APPLY_MODE_SET, SEPERATE_G_PIN);
     else

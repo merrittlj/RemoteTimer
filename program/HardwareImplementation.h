@@ -1,4 +1,4 @@
-/*  hardwareImplementation.h
+/*  HardwareImplementation.h
  *  Author: Lucas Merritt/dynamic.void
  *  Date: 12/8/22
  *  The hardware implementation of the timer, configurable  */
@@ -69,8 +69,8 @@
 /*
  * Apply modes(for below function)
  *
- * applyModeClear - Clear the pin
- * applyModeSet - Set the pin to a specified value
+ * applyModeClear - Clear the pin/register
+ * applyModeSet - Set the pin/register to a specified value
  */
 #define APPLY_MODE_CLEAR 0
 #define APPLY_MODE_SET 1
@@ -78,12 +78,23 @@
 /*
  * Sets/clears a pin on the specified port in the specified way
  *
- * pinMode: Uses definitions to specify which way to modify the pin on which port
- * ex: SEGMENTDATA
- * applyMode: See above definitions
+ * portPinMode: Uses definitions to specify which way to modify the pin on which port
+ * ex: SEGMENT_DATA
+ * applyMode: See Apply Mode definitions
  * hardwarePin: the pin to clear/set
  */
 void HardwareModifyPin(volatile unsigned char portPinMode, int applyMode, int hardwarePin);
+
+/*
+ * Sets/clears a whole register
+ *
+ * modifyPortMode: The way to modify the port and which register to use
+ * ex: SEGMENT_DATA
+ * applyMode: See Apply Mode definitions
+ * applyPins: The value to set the register to(h)/The representation of all pins that will be set or cleared(h)
+ * Can be hexadecimal or int(ex: the value of all the pins added together)
+ */
+void HardwareModifyRegister(volatile unsigned char modifyPortMode, int applyMode, unsigned char applyPins);
 
 /*
  * Initializes the hardware, data directions and such

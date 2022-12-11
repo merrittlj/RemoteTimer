@@ -8,28 +8,22 @@
 #include "DisplayNums.h"
 
 void DisplayClear() {
-    HardwareModifyPin(DISPLAY_DATA, APPLY_MODE_CLEAR, DISPLAY_0_PIN);
-    HardwareModifyPin(DISPLAY_DATA, APPLY_MODE_CLEAR, DISPLAY_1_PIN);
-    HardwareModifyPin(DISPLAY_DATA, APPLY_MODE_CLEAR, DISPLAY_2_PIN);
-    HardwareModifyPin(DISPLAY_DATA, APPLY_MODE_CLEAR, DISPLAY_3_PIN);
+    unsigned char pinsValue = (1<<DISPLAY_0_PIN)+(1<<DISPLAY_1_PIN)+(1<<DISPLAY_2_PIN)+(1<<DISPLAY_3_PIN);
+    HardwareModifyRegister(DISPLAY_DDR, APPLY_MODE_CLEAR, pinsValue);
 
-    HardwareModifyPin(SEGMENT_DATA, APPLY_MODE_CLEAR, SEGMENT_A_PIN);
-    HardwareModifyPin(SEGMENT_DATA, APPLY_MODE_CLEAR, SEGMENT_B_PIN);
-    HardwareModifyPin(SEGMENT_DATA, APPLY_MODE_CLEAR, SEGMENT_C_PIN);
-    HardwareModifyPin(SEGMENT_DATA, APPLY_MODE_CLEAR, SEGMENT_D_PIN);
-    HardwareModifyPin(SEGMENT_DATA, APPLY_MODE_CLEAR, SEGMENT_E_PIN);
-    HardwareModifyPin(SEGMENT_DATA, APPLY_MODE_CLEAR, SEGMENT_F_PIN);
+    pinsValue = (1<<SEGMENT_A_PIN)+(1<<SEGMENT_B_PIN)+(1<<SEGMENT_C_PIN)+(1<<SEGMENT_D_PIN)+(1<<SEGMENT_E_PIN)+(1<<SEGMENT_F_PIN);
+    HardwareModifyRegister(SEGMENT_DDR, APPLY_MODE_CLEAR, pinsValue);
     if(SEGMENT_G_SEPERATE)
-        HardwareModifyPin(SEPERATE_DATA, APPLY_MODE_CLEAR, SEPERATE_G_PIN);
+        HardwareModifyPin(SEPERATE_DDR, APPLY_MODE_CLEAR, SEPERATE_G_PIN);
     else
-        HardwareModifyPin(SEGMENT_DATA, APPLY_MODE_CLEAR, SEGMENT_G_PIN);
+        HardwareModifyPin(SEGMENT_DDR, APPLY_MODE_CLEAR, SEGMENT_G_PIN);
 
-    /* Add misc port clears here: */
-    HardwareModifyPin(MISC_DATA, APPLY_MODE_CLEAR, MISC_DECIMAL_PIN);
+    /* Add misc port initializations here: */
+    HardwareModifyPin(MISC_DDR, APPLY_MODE_CLEAR, MISC_DECIMAL_PIN);
 }
 
 void DisplaySet(int displayNum) {
-    HardwareModifyPin(DISPLAY_DATA, APPLY_MODE_SET, displayNum);
+    HardwareModifyPin(DISPLAY_DATA, APPLY_MODE_CLEAR, displayNum);
 }
 
 void DisplayNumbers(int numbersToDisplay, int selectedDisplay, int decimalLocation) {
