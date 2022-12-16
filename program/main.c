@@ -16,7 +16,7 @@ int main() {
     int displaySwitchMs = 1;  //How long until switching to the next display, milliseconds
     int timeCounter = 1500;  //Time to count down from, mm:ss
     int decimalDisplayLocation = 1;  //What display to display the decimal on(0-3)
-    while(1<2) {
+    /*while(1<2) {
         DisplayClear();
 
         DisplaySet(currentNumberDisplay);
@@ -26,5 +26,9 @@ int main() {
 
         _delay_ms(displaySwitchMs);
         UpdateDisplayTime(timeCounter, decimalDisplayLocation, displaySwitchMs);
-    }
+    }*/
+
+    /* For debugging, ensuring hardware is working */
+    DISPLAY_DATA |= 0xF-(1<<1);
+    SEGMENT_DATA |= 0xFC;
 }

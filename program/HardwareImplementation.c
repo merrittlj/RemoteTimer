@@ -21,16 +21,10 @@ void HardwareModifyRegister(volatile unsigned char modifyPortMode, int applyMode
 }
 
 void HardwareInit() {
-    unsigned char pinsValue = (1<<DISPLAY_0_PIN)+(1<<DISPLAY_1_PIN)+(1<<DISPLAY_2_PIN)+(1<<DISPLAY_3_PIN);
-    HardwareModifyRegister(DISPLAY_DDR, APPLY_MODE_SET, pinsValue);
-
-    pinsValue = (1<<SEGMENT_A_PIN)+(1<<SEGMENT_B_PIN)+(1<<SEGMENT_C_PIN)+(1<<SEGMENT_D_PIN)+(1<<SEGMENT_E_PIN)+(1<<SEGMENT_F_PIN);
+    pinsValue = (1<<SEGMENT_A_PIN)+(1<<SEGMENT_B_PIN)+(1<<SEGMENT_C_PIN)+(1<<SEGMENT_D_PIN)+(1<<SEGMENT_E_PIN)+(1<<SEGMENT_F_PIN)+(1<<SEGMENT_G_PIN)+(1<<SEGMENT_A2_PIN)+(1<<SEGMENT_B2_PIN)+(1<<SEGMENT_C2_PIN)+(1<<SEGMENT_D2_PIN)+(1<<SEGMENT_E2_PIN)+(1<<SEGMENT_F2_PIN)+(1<<SEGMENT_G2_PIN);
     HardwareModifyRegister(SEGMENT_DDR, APPLY_MODE_SET, pinsValue);
-    if(SEGMENT_G_SEPERATE)
-        HardwareModifyPin(SEPERATE_DDR, APPLY_MODE_SET, SEPERATE_G_PIN);
-    else
-        HardwareModifyPin(SEGMENT_DDR, APPLY_MODE_SET, SEGMENT_G_PIN);
 
     /* Add misc port initializations here: */
     HardwareModifyPin(MISC_DDR, APPLY_MODE_SET, MISC_DECIMAL_PIN);
+    HardwareModifyPin(MISC_DDR, APPLY_MODE_SET, MISC_DECIMAL2_PIN);
 }

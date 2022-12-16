@@ -25,20 +25,11 @@
  * Used to set output and read input
  * Usage: 
  *
- * DISPLAY_[DATA|DDR|PINS] - The port that the displays are on, used for GPIO
- * DISPLAY_[0-3]_PIN - The respective display's pin
  * SEGMENT_PORT_[DATA|DDR|PINS] - The port that the segments are on, used for GPIO 
  * SEGMENT_[A-G]_PIN - The respective segment's pin
  * MISC_PORT_[DATA|DDR|PINS] - The port that miscellaneous things are on, used for GPIO
  * MISC_[NAME]_PIN - The respective item's pin
  */
-#define DISPLAY_DATA PORTB_DATA
-#define DISPLAY_DDR PORTB_DDR
-#define DISPLAY_PINS PORTB_PINS
-#define DISPLAY_0_PIN 0
-#define DISPLAY_1_PIN 1
-#define DISPLAY_2_PIN 2
-#define DISPLAY_3_PIN 3
 
 #define SEGMENT_DATA PORTD_DATA
 #define SEGMENT_DDR PORTD_DDR
@@ -50,21 +41,22 @@
 #define SEGMENT_E_PIN 6
 #define SEGMENT_F_PIN 7
 #define SEGMENT_G_PIN 8
-/*
- * Is the last segment on a seperate port? (if not enough pins in one port for all of the segments)
- *
- * 0 = Same port as the rest/Not seperate 1 = Different port/Seperate(port/pin specified later)
- */
-#define SEGMENT_G_SEPERATE 1
-#define SEPERATE_DATA PORTC_DATA
-#define SEPERATE_DDR PORTC_DDR
-#define SEPERATE_PINS PORTC_PINS
-#define SEPERATE_G_PIN 1
+#define SEGMENT_A2_PIN 2
+#define SEGMENT_B2_PIN 3
+#define SEGMENT_C2_PIN 4
+#define SEGMENT_D2_PIN 5
+#define SEGMENT_E2_PIN 6
+#define SEGMENT_F2_PIN 7
+#define SEGMENT_G2_PIN 8
+
+/* All of the segment pins added together(used for functions) */
+unsigned char segmentPinsValue = (1<<SEGMENT_A_PIN)+(1<<SEGMENT_B_PIN)+(1<<SEGMENT_C_PIN)+(1<<SEGMENT_D_PIN)+(1<<SEGMENT_E_PIN)+(1<<SEGMENT_F_PIN)+(1<<SEGMENT_G_PIN)+(1<<SEGMENT_A2_PIN)+(1<<SEGMENT_B2_PIN)+(1<<SEGMENT_C2_PIN)+(1<<SEGMENT_D2_PIN)+(1<<SEGMENT_E2_PIN)+(1<<SEGMENT_F2_PIN)+(1<<SEGMENT_G2_PIN);
 
 #define MISC_DATA PORTC_DATA
 #define MISC_DDR PORTC_DDR
 #define MISC_PINS PORTC_PINS
 #define MISC_DECIMAL_PIN 0
+#define MISC_DECIMAL2_PIN 0
 
 /*
  * Apply modes(for below function)

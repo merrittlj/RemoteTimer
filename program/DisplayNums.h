@@ -28,9 +28,7 @@ unsigned char displayableDigits[10][2] = {
  *
  * Segments to enable(h), is G segment enabled
  */
-unsigned char numbersToDisplay[4][2] = {
-    {0xFC, 0},  //0
-    {0xFC, 0},  //0
+unsigned char numbersToDisplay[2][2] = {
     {0xFC, 0},  //0
     {0xFC, 0},  //0
 };
@@ -41,20 +39,13 @@ unsigned char numbersToDisplay[4][2] = {
 void DisplayClear();
 
 /*
- * Sets the current display, used for multiplexing
- *
- * displayNum: The index of the display to set to(0-3), use hardware definitions to call
- */
-void DisplaySet(int displayNum);
-
-/*
  * Shows the specified numbers on the display
  *
  * numbersToDisplay: The numbers to display, int form
- * ex: to display "1234" you would call DisplayNumbers(1234)
+ * ex: to display "12" you would call DisplayNumbers(12)
  * selectedDisplay: The current display
  * decimalLocation: What display the decimal should be shown on
- * Input a number > 3 if no decimal point(purposeful)
+ * Input a number > 1 if no decimal point(purposeful)
  */
 void DisplayNumbers(int numbersToDisplay, int selectedDisplay, int decimalLocation);
 
@@ -63,6 +54,5 @@ void DisplayNumbers(int numbersToDisplay, int selectedDisplay, int decimalLocati
  *
  * currentTime: The current time counter that is being actively displayed
  * decimalLocation: Where the decimal is/time precision
- * delayPeriod: How often the displays are switched between/multiplexed
  */
-void UpdateDisplayTime(int currentTime, int decimalLocation, int delayPeriod);
+void UpdateDisplayTime(int currentTime, int decimalLocation);
